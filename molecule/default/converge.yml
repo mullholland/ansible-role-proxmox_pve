@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    # molecule tests ins docker without working proxmox installation
+    proxmox_pve_dark_theme: "proxmox"
+
+  roles:
+    - role: "ansible-role-proxmox_pve"

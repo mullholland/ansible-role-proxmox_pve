@@ -1,0 +1,48 @@
+---
+# Mostly tested and planned for Proxmox 7+/Debian 11 Bullseye
+# Older versions may work
+
+# https://pve.proxmox.com/wiki/Package_Repositories#repos_secure_apt
+proxmox_pve_repository_key: "https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg"
+
+# manages the Proxmox /etc/apt/sources.list
+proxmox_pve_enable_default_repository: true
+
+# Disable Enterprise Repository
+# https://pve.proxmox.com/wiki/Package_Repositories#sysadmin_enterprise_repo
+proxmox_pve_enable_enterprise_repository: false
+
+# Enable the no subscription repository
+# https://pve.proxmox.com/wiki/Package_Repositories#sysadmin_no_subscription_repo
+# NOT recommended for production use
+proxmox_pve_enable_no_subscription_repository: true
+
+# Enable the Ceph Repository
+# https://pve.proxmox.com/wiki/Package_Repositories#sysadmin_package_repositories_ceph
+proxmox_pve_enable_ceph_repository: false
+# default is "pacific" can be "octopus" for legacy installations
+proxmox_pve_enable_ceph_repository_release: "pacific"
+# possible "main" or "test"
+proxmox_pve_enable_ceph_repository_version: "main"
+
+# manage cpu govenor
+proxmox_pve_cpu_govenor_manage: true
+# possible values
+# - "conservative"
+# - "ondemand"
+# - "userspace"
+# - "powersave"
+# - "performance"
+# - "schedutil"
+proxmox_pve_cpu_govenor: "performance"
+proxmox_pve_cpu_govenor_conf: "/etc/default/cpufrequtils"
+proxmox_pve_cpu_govenor_dependencies:
+  - "cpufrequtils"
+
+# install pve dark theme (https://github.com/Weilbyte/PVEDiscordDark)
+# Setting can be
+# - install   => install the dark theme
+# - update    => install/updates the dark theme
+# - uninstall => unisntall the dark theme
+proxmox_pve_dark_theme: "update"
+proxmox_pve_dark_theme_install_options: ""

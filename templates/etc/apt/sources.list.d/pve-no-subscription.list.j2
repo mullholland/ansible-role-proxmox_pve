@@ -1,0 +1,8 @@
+# PVE pve-no-subscription repository provided by proxmox.com,
+# NOT recommended for production use
+
+{% if proxmox_pve_enable_no_subscription_repository %}
+deb http://download.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-no-subscription
+{% else %}
+# deb http://download.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-no-subscription
+{% endif %}

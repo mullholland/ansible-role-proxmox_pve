@@ -1,0 +1,18 @@
+---
+molecule_exceptions:
+  - variation: Redhat/CentOS/Fedora
+    reason: "Proxmox is based on Debian"
+  - variation: Rocky Linux
+    reason: "Proxmox is based on Debian"
+  - variation: Almalinux
+    reason: "Proxmox is based on Debian"
+  - variation: Ubuntu
+    reason: "Proxmox is based on Debian"
+  - variation: AmazonLinux
+    reason: "Proxmox is based on Debian"
+molecule_scenarios:
+  - scenario: "default"
+    ansible: ["previous", "current"]
+    platforms:
+      - "debian10"
+      - "debian11"

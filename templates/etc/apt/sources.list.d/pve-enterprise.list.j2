@@ -1,0 +1,7 @@
+# PVE Enterprise Subscription Repository
+
+{% if proxmox_pve_enable_enterprise_repository %}
+deb https://enterprise.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-enterprise
+{% else %}
+#deb https://enterprise.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-enterprise
+{% endif %}

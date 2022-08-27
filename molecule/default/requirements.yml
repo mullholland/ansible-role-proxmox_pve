@@ -1,0 +1,13 @@
+---
+roles: []
+# Ansible Galaxy role
+# - src: mullholland.repository_epel
+# Role from git repository
+# - src: https://gitlab.adacor.app/ansible/ansible-role-repository_epel
+#   scm: git
+#   name: repository_epel
+collections: []
+# Install a collection from Ansible Galaxy.
+# - name: geerlingguy.php_roles
+#   version: 0.9.3
+#   source: https://galaxy.ansible.com

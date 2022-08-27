@@ -1,0 +1,8 @@
+# PVE ceph repository provided by proxmox.com,
+# https://pve.proxmox.com/wiki/Package_Repositories#sysadmin_package_repositories_ceph
+
+{% if proxmox_pve_enable_ceph_repository %}
+deb http://download.proxmox.com/debian/ceph-{{ proxmox_pve_enable_ceph_repository_release }} {{ ansible_distribution_release }} {{ proxmox_pve_enable_ceph_repository_version }}
+{% else %}
+#deb http://download.proxmox.com/debian/ceph-{{ proxmox_pve_enable_ceph_repository_release }} {{ ansible_distribution_release }} {{ proxmox_pve_enable_ceph_repository_version }}
+{% endif %}

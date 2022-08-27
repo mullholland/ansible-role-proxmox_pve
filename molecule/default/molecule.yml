@@ -1,0 +1,36 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: molecule/default/requirements.yml
+    requirements-file: molecule/default/requirements.yml
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
+driver:
+  name: docker
+platforms:
+  - name: "${scenario:-default}-${ansible:-current}-${platform:-ubuntu2004}"
+    image: "${namespace:-ghcr.io/mullholland}/docker-molecule-${platform:-ubuntu2004}"
+    command: /sbin/init
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+    # if published ports are needed
+    # published_ports:
+    #   - "0.0.0.0:8080:8080/tcp"
+    # networks:
+    #   - name: "${scenario:-default}-${ansible:-current}-${platform:-ubuntu2004}"
+    # docker_networks:
+    #   - name: "${scenario:-default}-${ansible:-current}-${platform:-ubuntu2004}"
+    #     ipam_config:
+    #       - subnet: '172.23.2.0/24'
+    #         gateway: '172.23.2.1'
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ASYNC_DIR: /tmp/.ansible_async
+verifier:
+  name: ansible

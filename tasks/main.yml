@@ -1,0 +1,95 @@
+---
+- name: Add PVE Apt signing key
+  ansible.builtin.apt_key:
+    url: "{{ proxmox_pve_repository_key }}"
+    state: present
+
+- name: update sources.list
+  ansible.builtin.template:
+    src: "etc/apt/sources.list.j2"
+    dest: "/etc/apt/sources.list"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+  when: proxmox_pve_enable_default_repository
+  register: proxmox_pve_repository_sources_list
+
+- name: update pve-enterprise.list
+  ansible.builtin.template:
+    src: "etc/apt/sources.list.d/pve-enterprise.list.j2"
+    dest: "/etc/apt/sources.list.d/pve-enterprise.list"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+  register: proxmox_pve_repository_enterprise_list
+
+- name: update pve-no-subscription.list
+  ansible.builtin.template:
+    src: "etc/apt/sources.list.d/pve-no-subscription.list.j2"
+    dest: "/etc/apt/sources.list.d/pve-no-subscription.list"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+  register: proxmox_pve_repository_no_subscription_list
+
+- name: update pve-ceph-repository.list
+  ansible.builtin.template:
+    src: "etc/apt/sources.list.d/pve-ceph-repository.list.j2"
+    dest: "/etc/apt/sources.list.d/pve-ceph-repository.list"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+  register: proxmox_pve_repository_ceph_list
+
+- name: Update repository cache
+  ansible.builtin.apt:
+    update_cache: true
+  when: proxmox_pve_repository_sources_list.changed or
+    proxmox_pve_repository_enterprise_list.changed or
+    proxmox_pve_repository_no_subscription_list.changed or
+    proxmox_pve_repository_ceph_list.changed
+  # Data should be refreshed immediatly for other roles which depend on them
+  # Flush handlers is not used because it would potentially flush handlers,
+  # which are not meant to be flushed at this point in the playbook
+  tags:
+    - skip_ansible_lint
+
+- name: manage CPU govenor
+  block:
+    - name: install cpu govenor dependencies
+      ansible.builtin.apt:
+        name: "{{ proxmox_pve_cpu_govenor_dependencies }}"
+        state: present
+
+    - name: update cpufrequtils config
+      ansible.builtin.template:
+        src: "etc/default/cpufrequtils.j2"
+        dest: "/etc/default/cpufrequtils"
+        owner: "root"
+        group: "root"
+        mode: '0644'
+      notify: restart_cpufrequtils
+  when: proxmox_pve_cpu_govenor_manage
+
+- name: PVE DarkTheme
+  block:
+    - name: get PVE Dark Theme installer
+      ansible.builtin.get_url:
+        url: "https://raw.githubusercontent.com/Weilbyte/PVEDiscordDark/master/PVEDiscordDark.sh"
+        dest: "/opt/PVEDiscordDark.sh"
+        mode: '0750'
+
+    - name: UNinstall PVEDarkTheme
+      ansible.builtin.command: /opt/PVEDiscordDark.sh install {{ proxmox_pve_dark_theme_install_options }}
+      when:
+        - proxmox_pve_dark_theme == "uninstall" or
+          proxmox_pve_dark_theme == "update"
+
+    - name: install PVEDarkTheme
+      ansible.builtin.command: /opt/PVEDiscordDark.sh install {{ proxmox_pve_dark_theme_install_options }}
+      when:
+        - proxmox_pve_dark_theme == "install" or
+          proxmox_pve_dark_theme == "update"
+
+  when:
+    - proxmox_pve_dark_theme in ("install", "uninstall" , "update")

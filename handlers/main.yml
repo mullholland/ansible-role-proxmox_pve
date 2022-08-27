@@ -1,0 +1,6 @@
+---
+- name: restart_cpufrequtils
+  ansible.builtin.service:
+    name: cpufrequtils
+    state: restarted
+    enabled: true
