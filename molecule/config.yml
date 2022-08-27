@@ -10,9 +10,10 @@ molecule_exceptions:
     reason: "Proxmox is based on Debian"
   - variation: AmazonLinux
     reason: "Proxmox is based on Debian"
+  - variation: Debian10
+    reason: "Testet only with Proxmox7/Debian 11"
 molecule_scenarios:
   - scenario: "default"
     ansible: ["previous", "current"]
     platforms:
-      - "debian10"
       - "debian11"
