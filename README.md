@@ -51,13 +51,14 @@ proxmox_pve_cpu_govenor_conf: "/etc/default/cpufrequtils"
 proxmox_pve_cpu_govenor_dependencies:
   - "cpufrequtils"
 
+# Diasbled ATM. Task ist not idempotent
 # install pve dark theme (https://github.com/Weilbyte/PVEDiscordDark)
 # Setting can be
 # - install   => install the dark theme
 # - update    => install/updates the dark theme
 # - uninstall => unisntall the dark theme
-proxmox_pve_dark_theme: "update"
-proxmox_pve_dark_theme_install_options: ""
+# proxmox_pve_dark_theme: "update"
+# proxmox_pve_dark_theme_install_options: ""
 ```
 
 

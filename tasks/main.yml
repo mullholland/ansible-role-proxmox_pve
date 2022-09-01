@@ -71,25 +71,28 @@
       notify: restart_cpufrequtils
   when: proxmox_pve_cpu_govenor_manage
 
-- name: PVE DarkTheme
-  block:
-    - name: get PVE Dark Theme installer
-      ansible.builtin.get_url:
-        url: "https://raw.githubusercontent.com/Weilbyte/PVEDiscordDark/master/PVEDiscordDark.sh"
-        dest: "/opt/PVEDiscordDark.sh"
-        mode: '0750'
+# Removed ATM
+# Task is not idempotent
+#
+# - name: PVE DarkTheme
+#   block:
+#     - name: get PVE Dark Theme installer
+#       ansible.builtin.get_url:
+#         url: "https://raw.githubusercontent.com/Weilbyte/PVEDiscordDark/master/PVEDiscordDark.sh"
+#         dest: "/opt/PVEDiscordDark.sh"
+#         mode: '0750'
 
-    - name: UNinstall PVEDarkTheme
-      ansible.builtin.command: /opt/PVEDiscordDark.sh install {{ proxmox_pve_dark_theme_install_options }}
-      when:
-        - proxmox_pve_dark_theme == "uninstall" or
-          proxmox_pve_dark_theme == "update"
+#     - name: UNinstall PVEDarkTheme
+#       ansible.builtin.command: /opt/PVEDiscordDark.sh install {{ proxmox_pve_dark_theme_install_options }}
+#       when:
+#         - proxmox_pve_dark_theme == "uninstall" or
+#           proxmox_pve_dark_theme == "update"
 
-    - name: install PVEDarkTheme
-      ansible.builtin.command: /opt/PVEDiscordDark.sh install {{ proxmox_pve_dark_theme_install_options }}
-      when:
-        - proxmox_pve_dark_theme == "install" or
-          proxmox_pve_dark_theme == "update"
+#     - name: install PVEDarkTheme
+#       ansible.builtin.command: /opt/PVEDiscordDark.sh install {{ proxmox_pve_dark_theme_install_options }}
+#       when:
+#         - proxmox_pve_dark_theme == "install" or
+#           proxmox_pve_dark_theme == "update"
 
-  when:
-    - proxmox_pve_dark_theme in ("install", "uninstall" , "update")
+#   when:
+#     - proxmox_pve_dark_theme in ("install", "uninstall" , "update")
