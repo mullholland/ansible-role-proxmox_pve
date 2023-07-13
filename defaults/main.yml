@@ -3,7 +3,7 @@
 # Older versions may work
 
 # https://pve.proxmox.com/wiki/Package_Repositories#repos_secure_apt
-proxmox_pve_repository_key: "https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg"
+proxmox_pve_repository_key: "https://enterprise.proxmox.com/debian/proxmox-release-{{ ansible_distribution_release }.gpg"
 
 # manages the Proxmox /etc/apt/sources.list
 proxmox_pve_enable_default_repository: true
@@ -38,12 +38,3 @@ proxmox_pve_cpu_govenor: "performance"
 proxmox_pve_cpu_govenor_conf: "/etc/default/cpufrequtils"
 proxmox_pve_cpu_govenor_dependencies:
   - "cpufrequtils"
-
-# Diasbled ATM. Task ist not idempotent
-# install pve dark theme (https://github.com/Weilbyte/PVEDiscordDark)
-# Setting can be
-# - install   => install the dark theme
-# - update    => install/updates the dark theme
-# - uninstall => unisntall the dark theme
-# proxmox_pve_dark_theme: "update"
-# proxmox_pve_dark_theme_install_options: ""
