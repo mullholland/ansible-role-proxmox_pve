@@ -16,29 +16,9 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   hosts: all
   become: true
   gather_facts: true
-  vars:
-    # molecule tests ins docker without working proxmox installation
-    proxmox_pve_dark_theme: "proxmox"
 
   roles:
     - role: "mullholland.proxmox_pve"
-```
-
-The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/mullholland/ansible-role-proxmox_pve/blob/master/molecule/default/prepare.yml):
-
-```yaml
----
-- name: Prepare
-  hosts: all
-  become: true
-  gather_facts: true
-
-  tasks:
-    - name: Copy PVE Repository Template
-      ansible.builtin.copy:
-        content: |
-            deb https://enterprise.proxmox.com/debian/pve {{ ansible_distribution_release }} pve-enterprise
-        dest: /etc/apt/sources.list.d/pve-enterprise.list
 ```
 
 
@@ -52,7 +32,7 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # Older versions may work
 
 # https://pve.proxmox.com/wiki/Package_Repositories#repos_secure_apt
-proxmox_pve_repository_key: "https://enterprise.proxmox.com/debian/proxmox-release-{{ ansible_distribution_release }.gpg"
+proxmox_pve_repository_key: "https://enterprise.proxmox.com/debian/proxmox-release-{{ ansible_distribution_release }}.gpg"
 
 # manages the Proxmox /etc/apt/sources.list
 proxmox_pve_enable_default_repository: true
