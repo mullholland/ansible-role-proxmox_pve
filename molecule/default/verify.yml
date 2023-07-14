@@ -16,7 +16,7 @@
 
     - name: verify PVE Apt signing key
       ansible.builtin.apt_key:
-        url: "https://enterprise.proxmox.com/debian/proxmox-release-bullseye.gpg"
+        url: "https://enterprise.proxmox.com/debian/proxmox-release-{{ ansible_distribution_release }}.gpg"
         state: present
       check_mode: true
       register: verify_apt_signing_key_status
