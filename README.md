@@ -1,11 +1,10 @@
-# [proxmox_pve](#proxmox_pve)
+# [Ansible role proxmox_pve](#proxmox_pve)
 
 Manage pve repositories and asprcts of the server
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/mullholland/ansible-role-proxmox_pve/workflows/Ansible%20Molecule/badge.svg)](https://github.com/mullholland/ansible-role-proxmox_pve/actions)|[![gitlab](https://gitlab.com/opensourceunicorn/ansible-role-proxmox_pve/badges/master/pipeline.svg)](https://gitlab.com/opensourceunicorn/ansible-role-proxmox_pve)|[![quality](https://img.shields.io/ansible/quality/60150)](https://galaxy.ansible.com/mullholland/proxmox_pve)|[![downloads](https://img.shields.io/ansible/role/d/60150)](https://galaxy.ansible.com/mullholland/proxmox_pve)|[![Version](https://img.shields.io/github/release/mullholland/ansible-role-proxmox_pve.svg)](https://github.com/mullholland/ansible-role-proxmox_pve/releases/)|
-
+|GitHub|Downloads|Version|
+|------|---------|-------|
+|[![github](https://github.com/mullholland/ansible-role-proxmox_pve/actions/workflows/molecule.yml/badge.svg)](https://github.com/mullholland/ansible-role-proxmox_pve/actions/workflows/molecule.yml)|[![downloads](https://img.shields.io/ansible/role/d/mullholland/proxmox_pve)](https://galaxy.ansible.com/mullholland/proxmox_pve)|[![Version](https://img.shields.io/github/release/mullholland/ansible-role-proxmox_pve.svg)](https://github.com/mullholland/ansible-role-proxmox_pve/releases/)|
 ## [Example Playbook](#example-playbook)
 
 This example is taken from [`molecule/default/converge.yml`](https://github.com/mullholland/ansible-role-proxmox_pve/blob/master/molecule/default/converge.yml) and is tested on each push, pull request and release.
@@ -20,6 +19,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   roles:
     - role: "mullholland.proxmox_pve"
 ```
+
 
 
 ## [Role Variables](#role-variables)
@@ -87,7 +87,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/m
 
 |container|tags|
 |---------|----|
-|[Debian](https://hub.docker.com/repository/docker/mullholland/docker-debian-systemd/general)|all|
+|[Debian](https://hub.docker.com/r/mullholland/debian)|all|
 
 The minimum version of Ansible required is 2.10, tests have been done to:
 
@@ -95,7 +95,7 @@ The minimum version of Ansible required is 2.10, tests have been done to:
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/mullholland/ansible-role-proxmox_pve/issues)
+If you find issues, please register them in [GitHub](https://github.com/mullholland/ansible-role-proxmox_pve/issues).
 
 ## [License](#license)
 
@@ -104,5 +104,3 @@ If you find issues, please register them in [GitHub](https://github.com/mullholl
 ## [Author Information](#author-information)
 
 [Mullholland](https://mullholland.net)
-
-Please consider [sponsoring me](https://github.com/sponsors/mullholland).

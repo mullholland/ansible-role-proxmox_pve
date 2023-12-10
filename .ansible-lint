@@ -8,6 +8,7 @@
 profile: production
 
 exclude_paths:
+  - meta/preferences.yml
   - molecule/**/prepare.yml
   - molecule/**/converge.yml
   - molecule/**/verify.yml
@@ -18,11 +19,8 @@ exclude_paths:
   - requirements.yml
 
 skip_list:
-  - name[casing]  # not important for me
-  - schema[galaxy]  # testing roles not collections
-  - galaxy[no-changelog]
-  - galaxy[tags]
-  - galaxy[version-missing]
+  - yaml[truthy]
+  - name[casing]
 
 enable_list:
   - name[prefix]
