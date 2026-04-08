@@ -4,6 +4,7 @@
 
 # https://pve.proxmox.com/wiki/Package_Repositories#repos_secure_apt
 proxmox_pve_repository_key: "https://enterprise.proxmox.com/debian/proxmox-release-{{ ansible_distribution_release }}.gpg"
+proxmox_pve_repository_keyring: "/etc/apt/keyrings/proxmox-release-{{ ansible_distribution_release }}.gpg"
 
 # manages the Proxmox /etc/apt/sources.list
 proxmox_pve_enable_default_repository: true

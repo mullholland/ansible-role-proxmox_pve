@@ -3,6 +3,6 @@
 # Ansible managed
 #
 repository:
-  description: Manage pve repositories and asprcts of the server
+  description: Manage Proxmox PVE repositories and aspects of the server
   homepage: https://mullholland.net
-  topics: cloud, system, ansible, molecule, tox, playbook
+  topics: cloud, system, ansible, molecule, playbook

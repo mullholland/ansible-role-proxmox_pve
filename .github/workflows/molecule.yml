@@ -10,29 +10,31 @@ on:
     tags_ignore:
       - '*'
   pull_request:
+    branches:
+      - master
   schedule:
     - cron: '31 16 16 * *'
 
 jobs:
   lint:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v4
       - name: ansible-lint
-        uses: ansible-community/ansible-lint-action@main
+        uses: ansible/ansible-lint@main
   test:
     needs:
       - lint
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         config:
           - image: "debian"
-            tag: "latest"
+            tag: "bookworm"
           - image: "debian"
-            tag: "bullseye"
+            tag: "trixie"
     steps:
       - name: checkout
         uses: actions/checkout@v4

@@ -1,5 +1,5 @@
 ---
-- name: restart_cpufrequtils
+- name: Restart cpufrequtils
   ansible.builtin.service:
     name: cpufrequtils
     state: restarted
