@@ -3,6 +3,5 @@
   hosts: all
   become: true
   gather_facts: true
-
   roles:
-    - role: "ansible-role-proxmox_pve"
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}"

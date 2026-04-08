@@ -3,7 +3,7 @@ galaxy_info:
   author: Mullholland
   namespace: mullholland
   role_name: proxmox_pve
-  description: Manage pve repositories and asprcts of the server
+  description: Manage Proxmox PVE repositories and aspects of the server
   license: MIT
   company: none
   min_ansible_version: "2.10"

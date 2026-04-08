@@ -1,10 +1,18 @@
 ---
-- name: Add PVE Apt signing key
-  ansible.builtin.apt_key:
-    url: "{{ proxmox_pve_repository_key }}"
-    state: present
+- name: Ensure /etc/apt/keyrings exists
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
 
-- name: update sources.list
+- name: Add PVE Apt signing key
+  ansible.builtin.get_url:
+    url: "{{ proxmox_pve_repository_key }}"
+    dest: "{{ proxmox_pve_repository_keyring }}"
+    mode: "0644"
+    force: false
+
+- name: Update sources.list
   ansible.builtin.template:
     src: "etc/apt/sources.list.j2"
     dest: "/etc/apt/sources.list"
@@ -14,7 +22,7 @@
   when: proxmox_pve_enable_default_repository
   register: proxmox_pve_repository_sources_list
 
-- name: update pve-enterprise.list
+- name: Update pve-enterprise.list
   ansible.builtin.template:
     src: "etc/apt/sources.list.d/pve-enterprise.list.j2"
     dest: "/etc/apt/sources.list.d/pve-enterprise.list"
@@ -23,7 +31,7 @@
     mode: '0644'
   register: proxmox_pve_repository_enterprise_list
 
-- name: update pve-no-subscription.list
+- name: Update pve-no-subscription.list
   ansible.builtin.template:
     src: "etc/apt/sources.list.d/pve-no-subscription.list.j2"
     dest: "/etc/apt/sources.list.d/pve-no-subscription.list"
@@ -32,7 +40,7 @@
     mode: '0644'
   register: proxmox_pve_repository_no_subscription_list
 
-- name: update pve-ceph-repository.list
+- name: Update pve-ceph-repository.list
   ansible.builtin.template:
     src: "etc/apt/sources.list.d/pve-ceph-repository.list.j2"
     dest: "/etc/apt/sources.list.d/pve-ceph-repository.list"
@@ -54,19 +62,19 @@
   tags:
     - skip_ansible_lint
 
-- name: manage CPU govenor
+- name: Manage CPU govenor
   when: proxmox_pve_cpu_govenor_manage
   block:
-    - name: install cpu govenor dependencies
+    - name: Install cpu govenor dependencies
       ansible.builtin.apt:
         name: "{{ proxmox_pve_cpu_govenor_dependencies }}"
         state: present
 
-    - name: update cpufrequtils config
+    - name: Update cpufrequtils config
       ansible.builtin.template:
         src: "etc/default/cpufrequtils.j2"
         dest: "{{ proxmox_pve_cpu_govenor_conf }}"
         owner: "root"
         group: "root"
         mode: '0644'
-      notify: restart_cpufrequtils
+      notify: Restart cpufrequtils
