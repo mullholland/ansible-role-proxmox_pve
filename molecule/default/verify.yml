@@ -71,6 +71,7 @@
         state: present
       register: verify_package_installed
       failed_when: (verify_package_installed is changed) or (verify_package_installed is failed)
+      when: proxmox_pve_cpu_govenor_manage | default(false)
 
     - name: verify if cpufrequtils exists
       ansible.builtin.lineinfile:
@@ -80,3 +81,4 @@
       check_mode: true
       register: verify_cpufrequtils_status
       failed_when: (verify_cpufrequtils_status is changed) or (verify_cpufrequtils_status is failed)
+      when: proxmox_pve_cpu_govenor_manage | default(false)

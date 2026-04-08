@@ -27,7 +27,8 @@ proxmox_pve_enable_ceph_repository_release: "pacific"
 proxmox_pve_enable_ceph_repository_version: "main"
 
 # manage cpu govenor
-proxmox_pve_cpu_govenor_manage: true
+# NOTE: cpufrequtils is not available on Debian Trixie+, disable by default
+proxmox_pve_cpu_govenor_manage: false
 # possible values
 # - "conservative"
 # - "ondemand"
