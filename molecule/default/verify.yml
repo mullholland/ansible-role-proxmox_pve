@@ -32,7 +32,7 @@
     - name: verify if pve-enterprise.list exists
       ansible.builtin.lineinfile:
         name: '/etc/apt/sources.list.d/pve-enterprise.list'
-        line: '#deb https://enterprise.proxmox.com/debian/pve {{ ansible_facts["distribution_release"] }} pve-enterprise'
+        line: '#deb [signed-by=/etc/apt/keyrings/proxmox-release-{{ ansible_facts["distribution_release"] }}.gpg] https://enterprise.proxmox.com/debian/pve {{ ansible_facts["distribution_release"] }} pve-enterprise'
         state: present
       check_mode: true
       register: verify_enterprise_repository_status
@@ -41,7 +41,7 @@
     - name: verify if pve-no-subscription.list exists
       ansible.builtin.lineinfile:
         name: '/etc/apt/sources.list.d/pve-no-subscription.list'
-        line: 'deb http://download.proxmox.com/debian/pve {{ ansible_facts["distribution_release"] }} pve-no-subscription'
+        line: 'deb [signed-by=/etc/apt/keyrings/proxmox-release-{{ ansible_facts["distribution_release"] }}.gpg] http://download.proxmox.com/debian/pve {{ ansible_facts["distribution_release"] }} pve-no-subscription'
         state: present
       check_mode: true
       register: verify_no_subscription_repository_status
@@ -50,7 +50,7 @@
     - name: verify if pve-ceph.list exists
       ansible.builtin.lineinfile:
         name: '/etc/apt/sources.list.d/pve-ceph-repository.list'
-        line: '#deb http://download.proxmox.com/debian/ceph-pacific {{ ansible_facts["distribution_release"] }} main'
+        line: '#deb [signed-by=/etc/apt/keyrings/proxmox-release-{{ ansible_facts["distribution_release"] }}.gpg] http://download.proxmox.com/debian/ceph-pacific {{ ansible_facts["distribution_release"] }} main'
         state: present
       check_mode: true
       register: verify_ceph_repository_status
@@ -59,7 +59,7 @@
     - name: verify if pve-ceph.list exists
       ansible.builtin.lineinfile:
         name: '/etc/apt/sources.list.d/pve-ceph-repository.list'
-        line: '#deb http://download.proxmox.com/debian/ceph-pacific {{ ansible_facts["distribution_release"] }} main'
+        line: '#deb [signed-by=/etc/apt/keyrings/proxmox-release-{{ ansible_facts["distribution_release"] }}.gpg] http://download.proxmox.com/debian/ceph-pacific {{ ansible_facts["distribution_release"] }} main'
         state: present
       check_mode: true
       register: verify_ceph_repository_status
